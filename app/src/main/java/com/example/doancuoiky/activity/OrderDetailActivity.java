@@ -1,8 +1,5 @@
 package com.example.doancuoiky.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -138,6 +138,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                                 OrderDetailAdapter adapter = new OrderDetailAdapter(OrderDetailActivity.this,
                                         R.layout.item_order_detail, orderDetailsList);
                                 lvOderDetail.setAdapter(adapter);
+                                Log.d("THANGDEPTRAI", "getListOrderDetail: " + idBill);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -146,6 +147,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("THANGDEPTRAI", "onErrorResponse: detailbill", error);
             }
         }) {
             @Override
@@ -166,7 +168,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void onDeleteOrder(final String id_bill){
+    private void onDeleteOrder(final String id_bill) {
         StringRequest request = new StringRequest(StringRequest.Method.POST, GlobalVariable.DELETE_BILL_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -174,11 +176,11 @@ public class OrderDetailActivity extends AppCompatActivity {
                     JSONObject object = new JSONObject(response);
                     JSONObject result = object.getJSONObject("result");
                     int code = Integer.parseInt(result.getString("code"));
-                    if(code == 0){
+                    if (code == 0) {
                         ProfileFragment.setDataUserOrder(OrderDetailActivity.this);
                         Toast.makeText(OrderDetailActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(OrderDetailActivity.this,MainActivity.class);
-                        intent.putExtra("gotoProfile","profile");
+                        Intent intent = new Intent(OrderDetailActivity.this, MainActivity.class);
+                        intent.putExtra("gotoProfile", "profile");
                         startActivity(intent);
                     }
 
@@ -191,18 +193,18 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.d("TAG2", "error2: " + error.toString());
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
-                Map<String,String> params = new HashMap<>();
-                params.put("Authorization",GlobalVariable.TOKEN);
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", GlobalVariable.TOKEN);
                 return params;
             }
 
             @Override
             protected Map<String, String> getParams() {
-                Map<String,String> params = new HashMap<>();
-                params.put("id_bill",id_bill);
+                Map<String, String> params = new HashMap<>();
+                params.put("id_bill", id_bill);
                 return params;
             }
         };

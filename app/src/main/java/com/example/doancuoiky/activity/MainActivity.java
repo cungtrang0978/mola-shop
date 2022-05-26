@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         ahBottomNavigationViewPager.setAdapter(adapter);
-        ahBottomNavigationViewPager.setPagingEnabled(true);
+        ahBottomNavigationViewPager.setPagingEnabled(false);
 
         // Create items
         AHBottomNavigationItem tab_home = new AHBottomNavigationItem(R.string.tab_home, R.mipmap.baseline_home_black_24, R.color.tab_home);

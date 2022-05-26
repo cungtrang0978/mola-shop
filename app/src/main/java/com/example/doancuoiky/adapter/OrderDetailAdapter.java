@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,8 @@ public class OrderDetailAdapter extends BaseAdapter{
     @SuppressLint("ViewHolder")
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
+        Log.d("THANGDEPTRAI", "anhXa: // Ánh xạ và gán giá trị");
+
         final LayoutInflater inflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         view = inflater.inflate(myLayout,null);
@@ -82,7 +85,6 @@ public class OrderDetailAdapter extends BaseAdapter{
     }
 
     private void anhXa(View view,int i) {
-
         // Ánh xạ và gán giá trị
         productNameOrderDetail = view.findViewById(R.id.tv_product_name_order_detail);
         productDescriptionOrderDetail = view.findViewById(R.id.tv_product_description_order_detail);
@@ -108,6 +110,7 @@ public class OrderDetailAdapter extends BaseAdapter{
                         );
                 break;
             }
+
         }
 
         // gán giá trị
